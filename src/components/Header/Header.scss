@@ -1,0 +1,26 @@
+:global body {
+    padding: 0;
+    margin: 0;
+}
+
+.headerOuter {
+    color: red;
+    height: 110px;
+    padding: 0 30px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerText {
+    line-height: 40px;
+}
+
+.login {
+    line-height: 100px;
+}
+
+.logo {
+    height: 120px;
+    margin-top: -10px;
+}
