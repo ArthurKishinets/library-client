@@ -9,7 +9,7 @@ type State = {
 
 type InputNames = 'email' | 'username' | 'password';
 
-export default class App extends React.Component<{}, State> {
+export default class Signup extends React.Component<{}, State> {
     state: State = {
         email: '',
         username: '',
@@ -18,7 +18,7 @@ export default class App extends React.Component<{}, State> {
 
     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        axios.post('/signup', this.state);
+        axios.post('/api/auth/signup', this.state);
     }
 
     handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
