@@ -3,5 +3,10 @@
         "tslint:recommended",
         "tslint-react"
     ],
-    "rules": {}
+    "rules": {
+        "use-input-property-decorator": true,
+        "use-output-property-decorator": true,
+        "use-host-property-decorator": true,
+        "no-attribute-parameter-decorator": true
+    }
 }

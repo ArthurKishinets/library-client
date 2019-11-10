@@ -27,6 +27,7 @@ module.exports = () => ({
                             '@babel/preset-typescript'
                         ],
                         plugins: [
+                            ["@babel/plugin-proposal-decorators", { "legacy": true }],
                             '@babel/plugin-proposal-class-properties',
                             [
                                 '@babel/plugin-transform-runtime',
@@ -84,6 +85,9 @@ module.exports = () => ({
         new HtmlWebpackPlugin({
             template: './index.html',
         }),
+        new webpack.DefinePlugin({
+            PRODUCTION: JSON.stringify(process.env.NODE_ENV === 'production'),
+        })
     ],
     devtool: process.env.NODE_ENV === 'development' ? 'source-map' : 'none',
     watch: process.env.NODE_ENV === 'development',

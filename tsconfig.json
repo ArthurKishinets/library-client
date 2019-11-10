@@ -1,0 +1,9 @@
+{
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "files": [],
+    "exclude": [
+        "node_modules"
+    ]
+}

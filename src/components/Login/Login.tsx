@@ -1,29 +1,34 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { StoreContext } from '../../stores/Auth';
+import { observer } from 'mobx-react';
 
 type State = {
     email: string,
-    password: string,
-    loggedIn: boolean,
+    password: string
 }
 
 type InputNames = 'email' | 'password';
 
+@observer
 export default class Signup extends React.Component<{}, State> {
     state: State = {
         email: '',
-        password: '',
-        loggedIn: false,
+        password: ''
     };
+    static contextType = StoreContext;
 
-    handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        axios.post('/api/auth/login', this.state)
-            .then(r => {
-                localStorage.setItem('token', r.data.accessToken);
-                this.setState({ loggedIn: true });
-            });
+        try {
+            let resp = await axios.post('/api/auth/login', this.state)
+            localStorage.setItem('token', resp.data.accessToken);
+            this.context.authStore.loggedIn = true;
+            this.context.authStore.token = resp.data.accessToken;
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +40,7 @@ export default class Signup extends React.Component<{}, State> {
     }
 
     render() {
-        const { loggedIn } = this.state;
+        const { loggedIn } = this.context.authStore;
         if (loggedIn) {
             return <Redirect push to="/home" />;
         }
